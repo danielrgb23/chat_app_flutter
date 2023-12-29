@@ -9,6 +9,18 @@ class LoginScreen extends StatefulWidget {
 }
 
 class _LoginScreenState extends State<LoginScreen> {
+  bool isAnimated = false;
+
+  @override
+  void initState() {
+    super.initState();
+    Future.delayed(const Duration(microseconds: 500), () {
+      setState(() {
+        isAnimated = true;
+      });
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     mq = MediaQuery.of(context).size;
@@ -28,10 +40,11 @@ class _LoginScreenState extends State<LoginScreen> {
   _buildBody(BuildContext context) {
     return Stack(
       children: [
-        Positioned(
+        AnimatedPositioned(
           top: mq.height * .15,
-          left: mq.width * .25,
+          right: isAnimated ? mq.width * .25 : -mq.width * .5,
           width: mq.width * .5,
+          duration: const Duration(seconds: 1),
           child: Image.asset('assets/images/chat-de-voz.png'),
         ),
         Positioned(
@@ -42,11 +55,19 @@ class _LoginScreenState extends State<LoginScreen> {
           child: ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
               backgroundColor: Color.fromARGB(255, 131, 206, 134),
-              shape: StadiumBorder(),
+              shape: const StadiumBorder(),
               elevation: 1,
             ),
-            onPressed: () {},
-            icon: Image.asset('assets/images/google.png', height: mq.height * 0.06,),
+            onPressed: () {
+              Navigator.pushReplacementNamed(
+                context,
+                'initScream',
+              );
+            },
+            icon: Image.asset(
+              'assets/images/google.png',
+              height: mq.height * 0.06,
+            ),
             label: RichText(
                 text: const TextSpan(
                     style: TextStyle(
@@ -54,7 +75,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       fontSize: 16,
                     ),
                     children: [
-                  TextSpan(text: 'Signin with '),
+                  TextSpan(text: 'Login with '),
                   TextSpan(
                       text: 'Google',
                       style: TextStyle(fontWeight: FontWeight.w500))
