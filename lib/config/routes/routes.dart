@@ -1,4 +1,4 @@
-import 'package:chat_app/feature/initial_scream_chat/presentation/page/initital_scream.dart';
+import 'package:chat_app/feature/initial/presentation/page/initital_scream.dart';
 import 'package:chat_app/feature/login/presentation/page/login_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,6 +10,9 @@ class AppRoutes {
 
       case 'initScream':
         return _materialRoute(InitialScream());
+
+      case 'login':
+        return _materialRoute(const LoginScreen());
 
       default:
         return _materialRoute(const LoginScreen());
