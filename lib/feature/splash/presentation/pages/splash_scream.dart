@@ -1,18 +1,26 @@
 import 'package:chat_app/main.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 
-class SplashScreem extends StatefulWidget {
-  const SplashScreem({Key? key}) : super(key: key);
+class SplashScreen extends StatefulWidget {
+  const SplashScreen({Key? key}) : super(key: key);
 
   @override
-  _SplashScreemState createState() => _SplashScreemState();
+  _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreemState extends State<SplashScreem> {
+class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(const Duration(microseconds: 1500), () {
+    Future.delayed(const Duration(seconds: 2), () {
+      //exit full screen
+      SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
+      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+        statusBarColor: Colors.transparent,
+      ));
+
+      //navigate to init screen
       Navigator.pushReplacementNamed(context, 'initScream');
     });
   }
@@ -41,10 +49,7 @@ class _SplashScreemState extends State<SplashScreem> {
             'MADE IN BRAZIL WITH ❤️',
             textAlign: TextAlign.center,
             style: TextStyle(
-              fontSize: 16,
-              color: Colors.black87,
-              letterSpacing: .5
-            ),
+                fontSize: 16, color: Colors.black87, letterSpacing: .5),
           ),
         ),
       ],
