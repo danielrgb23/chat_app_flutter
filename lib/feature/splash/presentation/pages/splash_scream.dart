@@ -21,7 +21,7 @@ class _SplashScreenState extends State<SplashScreen> {
       ));
 
       //navigate to init screen
-      Navigator.pushReplacementNamed(context, 'initScream');
+      Navigator.pushReplacementNamed(context, 'login');
     });
   }
 

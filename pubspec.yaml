@@ -38,6 +38,10 @@ dependencies:
   dio: ^5.4.0
   # for integrating firebase
   firebase_core: ^2.24.2
+  #for handling firebase authentication
+  firebase_auth: ^4.15.3
+  #for handling for google sign in
+  google_sign_in: ^6.2.1
 
 
 dev_dependencies:
