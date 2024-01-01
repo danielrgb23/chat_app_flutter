@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:chat_app/main.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -20,8 +23,14 @@ class _SplashScreenState extends State<SplashScreen> {
         statusBarColor: Colors.transparent,
       ));
 
-      //navigate to init screen
-      Navigator.pushReplacementNamed(context, 'login');
+      if (FirebaseAuth.instance.currentUser != null) {
+        log('\nUser: ${FirebaseAuth.instance.currentUser}');
+        //navigate to initial screen
+        Navigator.pushReplacementNamed(context, 'initScream');
+      } else {
+        //navigate to login screen
+        Navigator.pushReplacementNamed(context, 'login');
+      }
     });
   }
 

@@ -1,6 +1,7 @@
 import 'dart:developer';
 
 import 'package:chat_app/feature/login/presentation/bloc/controller/controller_auth.dart';
+import 'package:chat_app/helpers/dialogs.dart';
 import 'package:chat_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -99,18 +100,13 @@ class _LoginScreenState extends State<LoginScreen> {
           height: mq.height * .07,
           child: ElevatedButton.icon(
             style: ElevatedButton.styleFrom(
-              backgroundColor: Color.fromARGB(255, 131, 206, 134),
+              backgroundColor: const Color.fromARGB(255, 131, 206, 134),
               shape: const StadiumBorder(),
               elevation: 1,
             ),
             onPressed: () {
-              // _signin();
-              _loginScreenController.handleGoogleBtnClick().then((value) {
-                Navigator.pushReplacementNamed(
-                  context,
-                  'initScream',
-                );
-              });
+              _loginScreenController
+                  .handleGoogleBtnClick(context);
             },
             icon: Image.asset(
               'assets/images/google.png',
