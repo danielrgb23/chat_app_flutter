@@ -1,16 +1,16 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chat_app/core/constants/constants.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 
-class InitialScream extends StatefulWidget {
-  const InitialScream({Key? key}) : super(key: key);
+class HomeScreen extends StatefulWidget {
+  const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _InitialScreamState createState() => _InitialScreamState();
+  _HomeScreenState createState() => _HomeScreenState();
 }
 
-class _InitialScreamState extends State<InitialScream> {
+class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -21,7 +21,7 @@ class _InitialScreamState extends State<InitialScream> {
 
   // sign out function
   _signin() async {
-    await FirebaseAuth.instance.signOut();
+    await Constants.auth.signOut();
     await GoogleSignIn().signOut();
   }
 

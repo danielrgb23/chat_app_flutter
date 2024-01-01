@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:chat_app/feature/login/presentation/bloc/controller/controller_auth.dart';
-import 'package:chat_app/helpers/dialogs.dart';
 import 'package:chat_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -30,35 +27,6 @@ class _LoginScreenState extends State<LoginScreen> {
       });
     });
   }
-
-  // _handleGoogleBtnClick() {
-  //   signInWithGoogle().then((user) {
-  //     log('\nUser: ${user.user}');
-  //     log('\nUserAdditionalInfo: ${user.additionalUserInfo}');
-  //     Navigator.pushReplacementNamed(
-  //       context,
-  //       'initScream',
-  //     );
-  //   });
-  // }
-
-  // Future<UserCredential> signInWithGoogle() async {
-  //   //Trigger the authentication flow
-  //   final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
-
-  //   //Obtain the auth details from the request
-  //   final GoogleSignInAuthentication? googleAuth =
-  //       await googleUser?.authentication;
-
-  //   //Create a new credential
-  //   final credential = GoogleAuthProvider.credential(
-  //     accessToken: googleAuth?.accessToken,
-  //     idToken: googleAuth?.idToken,
-  //   );
-
-  //   //Once signed in, return the UserCredential
-  //   return await FirebaseAuth.instance.signInWithCredential(credential);
-  // }
 
   // sign out function
   _signin() async {
