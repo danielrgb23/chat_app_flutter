@@ -36,12 +36,18 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   dio: ^5.4.0
+  
   # for integrating firebase
   firebase_core: ^2.24.2
+
   #for handling firebase authentication
   firebase_auth: ^4.15.3
+
   #for handling for google sign in
   google_sign_in: ^6.2.1
+  
+  #for acessing cloud firestore database
+  cloud_firestore: ^4.1.0
 
 
 dev_dependencies:
