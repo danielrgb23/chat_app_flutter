@@ -4,6 +4,7 @@ import 'dart:developer';
 import 'package:chat_app/core/constants/constants.dart';
 import 'package:chat_app/feature/home/data/model/chat_user_model.dart';
 import 'package:chat_app/feature/home/presentation/widgets/chat_user_card.dart';
+import 'package:chat_app/feature/profile/presentation/page/profile_screen.dart';
 import 'package:chat_app/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -13,7 +14,7 @@ class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
-  _HomeScreenState createState() => _HomeScreenState();
+  State<HomeScreen> createState() => _HomeScreenState();
 }
 
 class _HomeScreenState extends State<HomeScreen> {
@@ -40,14 +41,22 @@ class _HomeScreenState extends State<HomeScreen> {
       title: const Text('Chat App'),
       actions: [
         IconButton(onPressed: () {}, icon: const Icon(Icons.search)),
-        IconButton(onPressed: () {}, icon: const Icon(Icons.more_vert))
+        IconButton(
+            onPressed: () {
+              Navigator.push(context, MaterialPageRoute(builder: (context) {
+                return ProfileScreen(
+                  user: list[0],
+                );
+              }));
+            },
+            icon: const Icon(Icons.more_vert))
       ],
     );
   }
 
   _buildFloatingActionButton(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: .0),
+      padding: const EdgeInsets.only(bottom: 10),
       child: FloatingActionButton(
         onPressed: () {
           _signin();
