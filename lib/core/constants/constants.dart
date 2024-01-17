@@ -9,11 +9,29 @@ class Constants {
   //for acessing cloud firestore database
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  //for storing self information
+  static late ChatUserModel me;
+
   static User get user => auth.currentUser!;
 
   //for cheking if user exists or not?
   static Future<bool> userExists() async {
     return (await firestore.collection('users').doc(user.uid).get()).exists;
+  }
+
+  //for getting current user info
+  static Future<void> getSelfInfo() async {
+    return await firestore
+        .collection('users')
+        .doc(user.uid)
+        .get()
+        .then((user) async {
+      if (user.exists) {
+        me = ChatUserModel.fromJson(user.data()!);
+      } else {
+        await createUser().then((value) => getSelfInfo());
+      }
+    });
   }
 
   //for create a new user
@@ -35,5 +53,13 @@ class Constants {
         .collection('users')
         .doc(user.uid)
         .set(chatUser.toJson());
+  }
+
+  //for getting all users from firestore database
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllUsers() {
+    return firestore
+        .collection('users')
+        .where("id", isNotEqualTo: user.uid)
+        .snapshots();
   }
 }
