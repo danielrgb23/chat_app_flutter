@@ -2,6 +2,8 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/core/constants/constants.dart';
 import 'package:chat_app/feature/home/data/model/chat_user_model.dart';
 import 'package:chat_app/feature/home/presentation/widgets/chat_user_card.dart';
+import 'package:chat_app/feature/login/presentation/page/login_screen.dart';
+import 'package:chat_app/helpers/dialogs.dart';
 import 'package:chat_app/main.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -27,9 +29,24 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   // sign out function
-  _signin() async {
+  _signin(BuildContext context) async {
+    //for showing progress dialog
+    Dialogs.showProgressBar(context);
+
+    //sign up from app
     await Constants.auth.signOut();
     await GoogleSignIn().signOut();
+
+    // for hidding progress dialog
+    Navigator.pop(context);
+
+    // for moving to home screen
+    Navigator.pop(context);
+
+    //replacing home screen with login screen
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+      return LoginScreen();
+    }));
   }
 
   _buildAppBar(BuildContext context) {
@@ -44,7 +61,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: FloatingActionButton.extended(
         backgroundColor: Colors.redAccent,
         onPressed: () async {
-          await _signin();
+          await _signin(context);
         },
         icon: const Icon(Icons.logout),
         label: const Text("Loggout"),
@@ -61,16 +78,37 @@ class _ProfileScreenState extends State<ProfileScreen> {
           SizedBox(width: mq.width, height: mq.height * .03),
 
           //user profile picture
-          ClipRRect(
-            borderRadius: BorderRadius.circular(mq.height * .1),
-            child: CachedNetworkImage(
-              width: mq.height * .2,
-              height: mq.height * .2,
-              fit: BoxFit.fill,
-              imageUrl: widget.user.image,
-              errorWidget: (context, url, error) =>
-                  const CircleAvatar(child: Icon(CupertinoIcons.person)),
-            ),
+          Stack(
+            children: [
+              //user profile picture
+              ClipRRect(
+                borderRadius: BorderRadius.circular(mq.height * .1),
+                child: CachedNetworkImage(
+                  width: mq.height * .2,
+                  height: mq.height * .2,
+                  fit: BoxFit.fill,
+                  imageUrl: widget.user.image,
+                  errorWidget: (context, url, error) =>
+                      const CircleAvatar(child: Icon(CupertinoIcons.person)),
+                ),
+              ),
+
+              //edit image button
+              Positioned(
+                bottom: 0,
+                right: -10,
+                child: MaterialButton(
+                  elevation: 1,
+                  onPressed: () {},
+                  color: Colors.white,
+                  shape: const CircleBorder(),
+                  child: const Icon(
+                    Icons.edit,
+                    color: Colors.blue,
+                  ),
+                ),
+              )
+            ],
           ),
 
           //for adding some spacing
@@ -121,7 +159,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 shape: const StadiumBorder(),
                 minimumSize: Size(mq.width * .5, mq.height * .06)),
             onPressed: () {},
-            icon: const Icon(Icons.edit, size: 28,),
+            icon: const Icon(
+              Icons.edit,
+              size: 28,
+            ),
             label: const Text(
               "UPDATE",
               style: TextStyle(fontSize: 16),
