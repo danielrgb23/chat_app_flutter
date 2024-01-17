@@ -1,13 +1,13 @@
 class ChatUserEntity {
-  final String image;
-  final String about;
-  final String name;
-  final String createdAt;
-  final String id;
-  final String lastActive;
-  final bool isOnline;
-  final String pushToken;
-  final String email;
+   String image;
+   String about;
+   String name;
+   String createdAt;
+   String id;
+   String lastActive;
+   bool isOnline;
+   String pushToken;
+   String email;
 
   ChatUserEntity(
     this.image,

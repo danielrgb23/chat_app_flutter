@@ -98,7 +98,7 @@ class _HomeScreenState extends State<HomeScreen> {
               return ListView.builder(
                   itemCount: list.length,
                   padding: EdgeInsets.only(top: mq.height * .01),
-                  physics: BouncingScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
                     return ChatUserCard(user: list[index]);
                     // return Text('Name: ${list[index].name}');
