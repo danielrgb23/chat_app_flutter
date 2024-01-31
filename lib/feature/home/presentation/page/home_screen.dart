@@ -25,7 +25,7 @@ class _HomeScreenState extends State<HomeScreen> {
   final List<ChatUserModel> _searchList = [];
 
   //for storing search status
-  bool isSearching = false;
+  bool _isSearching = false;
 
   @override
   void initState() {
@@ -35,10 +35,26 @@ class _HomeScreenState extends State<HomeScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: _buildAppBar(context),
-      floatingActionButton: _buildFloatingActionButton(context),
-      body: _buildBody(context),
+    return GestureDetector(
+      //for hiding keyboard when a tap is detected on screen
+      onTap: () => Focus.of(context).unfocus(),
+      child: WillPopScope(
+        onWillPop: () {
+          if (_isSearching) {
+            setState(() {
+              _isSearching = !_isSearching;
+            });
+            return Future.value(false);
+          } else {
+            return Future.value(true);
+          }
+        },
+        child: Scaffold(
+          appBar: _buildAppBar(context),
+          floatingActionButton: _buildFloatingActionButton(context),
+          body: _buildBody(context),
+        ),
+      ),
     );
   }
 
@@ -51,7 +67,7 @@ class _HomeScreenState extends State<HomeScreen> {
   _buildAppBar(BuildContext context) {
     return AppBar(
       leading: const Icon(CupertinoIcons.home),
-      title: isSearching
+      title: _isSearching
           ? TextField(
               decoration: const InputDecoration(
                   border: InputBorder.none, hintText: "Name, E-mail, ..."),
@@ -80,10 +96,10 @@ class _HomeScreenState extends State<HomeScreen> {
         IconButton(
             onPressed: () {
               setState(() {
-                isSearching = !isSearching;
+                _isSearching = !_isSearching;
               });
             },
-            icon: Icon(isSearching
+            icon: Icon(_isSearching
                 ? CupertinoIcons.clear_circled_solid
                 : Icons.search)),
 
@@ -137,11 +153,12 @@ class _HomeScreenState extends State<HomeScreen> {
 
             if (_list.isNotEmpty) {
               return ListView.builder(
-                  itemCount: isSearching ? _searchList.length : _list.length,
+                  itemCount: _isSearching ? _searchList.length : _list.length,
                   padding: EdgeInsets.only(top: mq.height * .01),
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (context, index) {
-                    return ChatUserCard(user:  isSearching ? _searchList[index] : _list[index]);
+                    return ChatUserCard(
+                        user: _isSearching ? _searchList[index] : _list[index]);
                     // return Text('Name: ${list[index].name}');
                   });
             } else {
