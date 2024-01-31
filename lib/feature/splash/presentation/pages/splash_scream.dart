@@ -19,9 +19,8 @@ class _SplashScreenState extends State<SplashScreen> {
     Future.delayed(const Duration(seconds: 2), () {
       //exit full screen
       SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
-      SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-        statusBarColor: Colors.transparent,
-      ));
+      SystemChrome.setSystemUIOverlayStyle(
+          const SystemUiOverlayStyle(systemNavigationBarColor: Colors.white));
 
       if (Constants.auth.currentUser != null) {
         log('\nUser: ${Constants.auth.currentUser}');
