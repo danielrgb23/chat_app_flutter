@@ -52,6 +52,9 @@ dependencies:
   #for showing network images
   cached_network_image: ^3.3.1
 
+  #For piking images
+  image_picker: ^0.8.6
+
 
 dev_dependencies:
   flutter_test:
