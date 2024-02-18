@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/core/apis/apis.dart';
 import 'package:chat_app/main.dart';
@@ -39,7 +42,7 @@ class _ChatScreenState extends State<ChatScreen> {
       children: [
         Expanded(
           child: StreamBuilder(
-            stream: APIs.getAllUsers(),
+            stream: APIs.getAllMessages(),
             builder: (context, snapshot) {
               switch (snapshot.connectionState) {
                 //if data is loading
@@ -48,19 +51,20 @@ class _ChatScreenState extends State<ChatScreen> {
                   return const Center(
                     child: CircularProgressIndicator(),
                   );
-          
+
                 //if some or all data is loaded then show it
                 case ConnectionState.active:
                 case ConnectionState.done:
-                  // if (snapshot.hasData) {
-                  //   final data = snapshot.data?.docs;
-                  //   _list =
-                  //       data?.map((e) => ChatUserModel.fromJson(e.data())).toList() ??
-                  //           [];
-                  // }
-          
+                  if (snapshot.hasData) {
+                    final data = snapshot.data?.docs;
+                    log("Data: ${jsonEncode(data![0].data())}");
+                    // _list =
+                    //     data?.map((e) => ChatUserModel.fromJson(e.data())).toList() ??
+                    //         [];
+                  }
+
                   final _list = ["hii", "hello", "good bye"];
-          
+
                   if (_list.isNotEmpty) {
                     return ListView.builder(
                         itemCount: _list.length,

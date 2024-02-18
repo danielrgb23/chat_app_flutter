@@ -78,7 +78,7 @@ class APIs {
     });
   }
 
-   // update profile picture of user
+  // update profile picture of user
   static Future<void> updateProfilePicture(File file) async {
     //getting image file extension
     final ext = file.path.split('.').last;
@@ -102,6 +102,10 @@ class APIs {
         .update({'image': me.image});
   }
 
-/************************  Chat Screen Related APIs  ***************************/
+  /// ************************  Chat Screen Related APIs  ***************************
 
+//for getting all messages of a specific conversation from firestore database
+  static Stream<QuerySnapshot<Map<String, dynamic>>> getAllMessages() {
+    return firestore.collection('messages').snapshots();
+  }
 }
