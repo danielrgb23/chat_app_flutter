@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:chat_app/core/apis/apis.dart';
 import 'package:chat_app/main.dart';
 import 'package:chat_app/models/chat_user_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -36,6 +37,50 @@ class _ChatScreenState extends State<ChatScreen> {
   _buildBody(BuildContext context) {
     return Column(
       children: [
+        Expanded(
+          child: StreamBuilder(
+            stream: APIs.getAllUsers(),
+            builder: (context, snapshot) {
+              switch (snapshot.connectionState) {
+                //if data is loading
+                case ConnectionState.waiting:
+                case ConnectionState.none:
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+          
+                //if some or all data is loaded then show it
+                case ConnectionState.active:
+                case ConnectionState.done:
+                  // if (snapshot.hasData) {
+                  //   final data = snapshot.data?.docs;
+                  //   _list =
+                  //       data?.map((e) => ChatUserModel.fromJson(e.data())).toList() ??
+                  //           [];
+                  // }
+          
+                  final _list = ["hii", "hello", "good bye"];
+          
+                  if (_list.isNotEmpty) {
+                    return ListView.builder(
+                        itemCount: _list.length,
+                        padding: EdgeInsets.only(top: mq.height * .01),
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return Text('Message: ${_list[index]}');
+                        });
+                  } else {
+                    return const Center(
+                      child: Text(
+                        'Say hii! 👋',
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    );
+                  }
+              }
+            },
+          ),
+        ),
         _chatInput(),
       ],
     );
