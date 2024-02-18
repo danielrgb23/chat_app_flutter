@@ -1,7 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 
-import 'package:chat_app/core/constants/constants.dart';
+import 'package:chat_app/core/constants/apis.dart';
 import 'package:chat_app/feature/home/data/model/chat_user_model.dart';
 import 'package:chat_app/feature/home/presentation/widgets/chat_user_card.dart';
 import 'package:chat_app/feature/profile/presentation/page/profile_screen.dart';
@@ -30,7 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void initState() {
     super.initState();
-    Constants.getSelfInfo();
+    APIs.getSelfInfo();
   }
 
   @override
@@ -60,7 +60,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   // sign out function
   _signin() async {
-    await Constants.auth.signOut();
+    await APIs.auth.signOut();
     await GoogleSignIn().signOut();
   }
 
@@ -108,7 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
             onPressed: () {
               Navigator.push(context, MaterialPageRoute(builder: (context) {
                 return ProfileScreen(
-                  user: Constants.me,
+                  user: APIs.me,
                 );
               }));
             },
@@ -131,7 +131,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   _buildBody(BuildContext context) {
     return StreamBuilder(
-      stream: Constants.getAllUsers(),
+      stream: APIs.getAllUsers(),
       builder: (context, snapshot) {
         switch (snapshot.connectionState) {
           //if data is loading

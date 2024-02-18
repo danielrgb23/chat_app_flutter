@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:chat_app/core/constants/constants.dart';
+import 'package:chat_app/core/constants/apis.dart';
 import 'package:chat_app/main.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -22,8 +22,8 @@ class _SplashScreenState extends State<SplashScreen> {
       SystemChrome.setSystemUIOverlayStyle(
           const SystemUiOverlayStyle(systemNavigationBarColor: Colors.white));
 
-      if (Constants.auth.currentUser != null) {
-        log('\nUser: ${Constants.auth.currentUser}');
+      if (APIs.auth.currentUser != null) {
+        log('\nUser: ${APIs.auth.currentUser}');
         //navigate to initial screen
         Navigator.pushReplacementNamed(context, 'initScream');
       } else {

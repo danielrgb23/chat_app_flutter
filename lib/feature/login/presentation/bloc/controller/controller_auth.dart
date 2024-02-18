@@ -1,6 +1,6 @@
 import 'dart:developer';
 
-import 'package:chat_app/core/constants/constants.dart';
+import 'package:chat_app/core/constants/apis.dart';
 import 'package:chat_app/feature/login/domain/usecases/google_sign_in_usecase.dart';
 import 'package:chat_app/helpers/dialogs.dart';
 import 'package:flutter/material.dart';
@@ -22,13 +22,13 @@ class LoginScreenController {
         log('\nUser: ${user.user}');
         log('\nUserAdditionalInfo: ${user.additionalUserInfo}');
 
-        if (await Constants.userExists()) {
+        if (await APIs.userExists()) {
           Navigator.pushReplacementNamed(
             context,
             'initScream',
           );
         } else {
-          Constants.createUser().then((value) {
+          APIs.createUser().then((value) {
             Navigator.pushReplacementNamed(
               context,
               'initScream',

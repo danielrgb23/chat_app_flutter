@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:chat_app/core/constants/constants.dart';
+import 'package:chat_app/core/constants/apis.dart';
 import 'package:chat_app/helpers/dialogs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +12,7 @@ class GoogleSignInUseCase {
   final GoogleSignIn _googleSignIn;
 
   GoogleSignInUseCase({FirebaseAuth? auth, GoogleSignIn? googleSignIn})
-      : _auth = auth ?? Constants.auth,
+      : _auth = auth ?? APIs.auth,
         _googleSignIn = googleSignIn ?? GoogleSignIn();
 
   Future<UserCredential?> signInWithGoogle(BuildContext context) async {
