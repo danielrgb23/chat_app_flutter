@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chat_app/core/constants/constants.dart';
+import 'package:chat_app/core/constants/apis.dart';
 import 'package:chat_app/feature/home/data/model/chat_user_model.dart';
 import 'package:chat_app/feature/home/presentation/widgets/chat_user_card.dart';
 import 'package:chat_app/feature/login/presentation/page/login_screen.dart';
@@ -46,7 +46,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     Dialogs.showProgressBar(context);
 
     //sign up from app
-    await Constants.auth.signOut();
+    await APIs.auth.signOut();
     await GoogleSignIn().signOut();
 
     // for hidding progress dialog
@@ -114,7 +114,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                           child: CachedNetworkImage(
                             width: mq.height * .2,
                             height: mq.height * .2,
-                            fit: BoxFit.fill,
+                            fit: BoxFit.cover,
                             imageUrl: widget.user.image,
                             errorWidget: (context, url, error) =>
                                 const CircleAvatar(
@@ -155,7 +155,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               TextFormField(
                 initialValue: widget.user.name,
-                onSaved: (value) => Constants.me.name = value ?? '',
+                onSaved: (value) => APIs.me.name = value ?? '',
                 validator: (value) =>
                     value != null && value.isNotEmpty ? null : "Required Field",
                 decoration: InputDecoration(
@@ -174,7 +174,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
               TextFormField(
                 initialValue: widget.user.about,
-                onSaved: (value) => Constants.me.about = value ?? '',
+                onSaved: (value) => APIs.me.about = value ?? '',
                 validator: (value) =>
                     value != null && value.isNotEmpty ? null : "Required Field",
                 decoration: InputDecoration(
@@ -199,7 +199,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
                     _formKey.currentState!.save();
-                    Constants.updateUserInfo().then((value) {
+                    APIs.updateUserInfo().then((value) {
                       Dialogs.showSnackBar(
                           context, "Profile Update Sucessfuilly!");
                     });
@@ -258,14 +258,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         final ImagePicker picker = ImagePicker();
                         // Pick an image.
                         final XFile? image =
-                            await picker.pickImage(source: ImageSource.gallery);
-
+                            await picker.pickImage(source: ImageSource.gallery, imageQuality: 80);
                         if (image != null) {
                           log("Image Path: ${image.path} -- MimeType: ${image.mimeType}}");
-
                           setState(() {
                             _image = image.path;
                           });
+
+                          APIs.updateProfilePicture(File(_image!));
                           // For hidding bottom sheet
                           Navigator.pop(context);
                         }
@@ -282,14 +282,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
                         final ImagePicker picker = ImagePicker();
                         // Pick an image.
                         final XFile? image =
-                            await picker.pickImage(source: ImageSource.camera);
-
+                            await picker.pickImage(source: ImageSource.camera, imageQuality: 80);
                         if (image != null) {
                           log("Image Path: ${image.path}}");
-
                           setState(() {
                             _image = image.path;
                           });
+
+                           APIs.updateProfilePicture(File(_image!));
                           // For hidding bottom sheet
                           Navigator.pop(context);
                         }
