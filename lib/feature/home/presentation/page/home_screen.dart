@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 
 import 'package:chat_app/core/constants/apis.dart';
-import 'package:chat_app/feature/home/data/model/chat_user_model.dart';
+import 'package:chat_app/models/chat_user_model.dart';
 import 'package:chat_app/feature/home/presentation/widgets/chat_user_card.dart';
 import 'package:chat_app/feature/profile/presentation/page/profile_screen.dart';
 import 'package:chat_app/main.dart';

@@ -1,4 +1,4 @@
-import 'package:chat_app/feature/login/presentation/bloc/controller/controller_auth.dart';
+import 'package:chat_app/feature/login/presentation/controller/controller_auth.dart';
 import 'package:chat_app/main.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

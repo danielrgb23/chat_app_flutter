@@ -1,4 +1,4 @@
-import 'package:chat_app/feature/home/domain/entities/chat_user_entity.dart';
+import 'package:chat_app/entities/chat_user_entity.dart';
 
 class ChatUserModel extends ChatUserEntity {
   ChatUserModel(
