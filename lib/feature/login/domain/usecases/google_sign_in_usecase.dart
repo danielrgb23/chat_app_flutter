@@ -1,7 +1,7 @@
 import 'dart:developer';
 import 'dart:io';
 
-import 'package:chat_app/core/constants/apis.dart';
+import 'package:chat_app/core/apis/apis.dart';
 import 'package:chat_app/helpers/dialogs.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';

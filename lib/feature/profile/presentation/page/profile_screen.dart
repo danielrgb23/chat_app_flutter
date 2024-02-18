@@ -4,7 +4,7 @@ import 'dart:developer';
 import 'dart:io';
 
 import 'package:cached_network_image/cached_network_image.dart';
-import 'package:chat_app/core/constants/apis.dart';
+import 'package:chat_app/core/apis/apis.dart';
 import 'package:chat_app/models/chat_user_model.dart';
 import 'package:chat_app/feature/home/presentation/widgets/chat_user_card.dart';
 import 'package:chat_app/feature/login/presentation/page/login_screen.dart';

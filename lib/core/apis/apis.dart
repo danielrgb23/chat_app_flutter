@@ -101,4 +101,7 @@ class APIs {
         .doc(user.uid)
         .update({'image': me.image});
   }
+
+/************************  Chat Screen Related APIs  ***************************/
+
 }
