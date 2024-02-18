@@ -1,6 +1,7 @@
 import 'package:chat_app/feature/home/data/model/chat_user_model.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class Constants {
   //for authentication
@@ -8,6 +9,9 @@ class Constants {
 
   //for acessing cloud firestore database
   static FirebaseFirestore firestore = FirebaseFirestore.instance;
+
+  //for acessing firestore storage
+  static FirebaseStorage storage = FirebaseStorage.instance;
 
   //for storing self information
   static late ChatUserModel me;
