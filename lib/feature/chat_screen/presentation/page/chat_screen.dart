@@ -21,6 +21,7 @@ class _ChatScreenState extends State<ChatScreen> {
     return SafeArea(
       child: Scaffold(
         appBar: buildAppBar(context),
+        body: _buildBody(context),
       ),
     );
   }
@@ -32,6 +33,15 @@ class _ChatScreenState extends State<ChatScreen> {
     );
   }
 
+  _buildBody(BuildContext context) {
+    return Column(
+      children: [
+        _chatInput(),
+      ],
+    );
+  }
+
+// app bar widget
   Widget _appBar() {
     return InkWell(
       onTap: () {},
@@ -78,6 +88,84 @@ class _ChatScreenState extends State<ChatScreen> {
               const Text("Last seen not avaliable",
                   style: TextStyle(fontSize: 13, color: Colors.black54)),
             ],
+          )
+        ],
+      ),
+    );
+  }
+
+//botton chat input field
+  Widget _chatInput() {
+    return Padding(
+      padding: EdgeInsets.symmetric(
+          vertical: mq.height * .01, horizontal: mq.width * .025),
+      child: Row(
+        children: [
+          //input field & buttons
+          Expanded(
+            child: Card(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(15)),
+              child: Row(
+                children: [
+                  // emoji button
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.emoji_emotions,
+                        color: Colors.blueAccent,
+                        size: 25,
+                      )),
+
+                  const Expanded(
+                      child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: null,
+                    decoration: InputDecoration(
+                        hintText: "Type something...",
+                        hintStyle: TextStyle(
+                          color: Colors.blueAccent,
+                        ),
+                        border: InputBorder.none),
+                  )),
+
+                  // pick image from gallery button
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.image,
+                        color: Colors.blueAccent,
+                        size: 26,
+                      )),
+
+                  // take image from camera button
+                  IconButton(
+                      onPressed: () {},
+                      icon: const Icon(
+                        Icons.camera_alt_rounded,
+                        color: Colors.blueAccent,
+                        size: 26,
+                      )),
+
+                  // for adding some space
+                  SizedBox(width: mq.width * .02),
+                ],
+              ),
+            ),
+          ),
+          //send message button
+          MaterialButton(
+            onPressed: () {},
+            minWidth: 0,
+            padding:
+                const EdgeInsets.only(top: 10, bottom: 10, left: 10, right: 10),
+            shape: const CircleBorder(),
+            color: Colors.green,
+            child: const Icon(
+              Icons.send,
+              color: Colors.white,
+              size: 28,
+            ),
           )
         ],
       ),
