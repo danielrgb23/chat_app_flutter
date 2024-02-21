@@ -1,4 +1,7 @@
+import 'dart:developer';
+
 import 'package:chat_app/core/apis/apis.dart';
+import 'package:chat_app/helpers/my_date_util.dart';
 import 'package:chat_app/main.dart';
 import 'package:chat_app/models/message_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -24,6 +27,11 @@ class _MessageCardState extends State<MessageCard> {
 
   //send or another user message
   Widget _blueMessage() {
+    if (widget.message.read.isEmpty) {
+      APIs.updateMessageReadStatus(widget.message);
+      log("Message read update");
+    }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
@@ -52,7 +60,8 @@ class _MessageCardState extends State<MessageCard> {
         Padding(
           padding: EdgeInsets.only(right: mq.width * .04),
           child: Text(
-            widget.message.sent,
+            MyDateUtil.getFormattedTime(
+                context: context, time: widget.message.sent),
             style: const TextStyle(color: Colors.black54, fontSize: 13),
           ),
         ),
@@ -74,14 +83,19 @@ class _MessageCardState extends State<MessageCard> {
             ),
 
             //double tick blue icon for message read
-            const Icon(Icons.done_all_rounded, color: Colors.blue, size: 20),
+            widget.message.read.isNotEmpty
+                ? const Icon(Icons.done_all_rounded,
+                    color: Colors.blue, size: 20)
+                : const Icon(Icons.done_all_rounded,
+                    color: Colors.grey, size: 20),
 
             //for adding some space
             const SizedBox(width: 2),
 
             //read time
             Text(
-              "${widget.message.read}${widget.message.sent}",
+              MyDateUtil.getFormattedTime(
+                  context: context, time: widget.message.sent),
               style: const TextStyle(color: Colors.black54, fontSize: 13),
             ),
           ],
