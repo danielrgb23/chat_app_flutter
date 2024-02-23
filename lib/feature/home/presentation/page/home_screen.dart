@@ -35,6 +35,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return GestureDetector(
       //for hiding keyboard when a tap is detected on screen
       onTap: () => Focus.of(context).unfocus(),
+      // ignore: deprecated_member_use
       child: WillPopScope(
         onWillPop: () {
           if (_isSearching) {

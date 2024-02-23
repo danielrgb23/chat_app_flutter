@@ -1,11 +1,15 @@
+import 'dart:io';
+
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:chat_app/core/apis/apis.dart';
-import 'package:chat_app/feature/chat_screen/presentation/page/widget/message_card.dart';
+import 'package:chat_app/feature/chat_screen/presentation/widget/message_card.dart';
 import 'package:chat_app/main.dart';
 import 'package:chat_app/models/chat_user_model.dart';
 import 'package:chat_app/models/message_model.dart';
+import 'package:emoji_picker_flutter/emoji_picker_flutter.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart' as foundation;
 
 class ChatScreen extends StatefulWidget {
   final ChatUserModel user;
@@ -25,13 +29,32 @@ class _ChatScreenState extends State<ChatScreen> {
   //for hadling message text changes
   final _textController = TextEditingController();
 
+  //for storing value of showing or hiding emoji
+  bool _showEmoji = false;
+
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        backgroundColor: const Color.fromARGB(255, 234, 248, 255),
-        appBar: buildAppBar(context),
-        body: _buildBody(context),
+    return GestureDetector(
+      onTap: () => FocusScope.of(context).unfocus(),
+      child: SafeArea(
+        // ignore: deprecated_member_use
+        child: WillPopScope(
+          onWillPop: () {
+            if (_showEmoji) {
+              setState(() {
+                _showEmoji = !_showEmoji;
+              });
+              return Future.value(false);
+            } else {
+              return Future.value(true);
+            }
+          },
+          child: Scaffold(
+            backgroundColor: const Color.fromARGB(255, 234, 248, 255),
+            appBar: buildAppBar(context),
+            body: _buildBody(context),
+          ),
+        ),
       ),
     );
   }
@@ -89,7 +112,23 @@ class _ChatScreenState extends State<ChatScreen> {
             },
           ),
         ),
+
+        //chat input field
         _chatInput(),
+
+        // show emojis on keyboard emoji button click & vice versa
+        if (_showEmoji)
+          SizedBox(
+            height: mq.height * .35,
+            child: EmojiPicker(
+              textEditingController: _textController,
+              config: Config(
+                bgColor: const Color.fromARGB(255, 234, 248, 255),
+                columns: 7,
+                emojiSizeMax: 32 * (Platform.isIOS ? 1.30 : 1.0),
+              ),
+            ),
+          )
       ],
     );
   }
@@ -164,7 +203,10 @@ class _ChatScreenState extends State<ChatScreen> {
                 children: [
                   // emoji button
                   IconButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        FocusScope.of(context).unfocus();
+                        setState(() => _showEmoji = !_showEmoji);
+                      },
                       icon: const Icon(
                         Icons.emoji_emotions,
                         color: Colors.blueAccent,
@@ -176,6 +218,9 @@ class _ChatScreenState extends State<ChatScreen> {
                     controller: _textController,
                     keyboardType: TextInputType.multiline,
                     maxLines: null,
+                    onTap: () {
+                      if (_showEmoji) setState(() => _showEmoji = !_showEmoji);
+                    },
                     decoration: const InputDecoration(
                         hintText: "Type something...",
                         hintStyle: TextStyle(

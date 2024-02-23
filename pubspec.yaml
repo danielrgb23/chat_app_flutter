@@ -58,6 +58,9 @@ dependencies:
   # for accessing Firebase Storage (for updating files)
   firebase_storage: ^11.0.6
 
+  # For showing emojis
+  emoji_picker_flutter: ^1.6.4
+
 
 dev_dependencies:
   flutter_test:
