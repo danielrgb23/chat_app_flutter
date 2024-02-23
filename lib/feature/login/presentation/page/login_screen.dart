@@ -1,8 +1,6 @@
 import 'package:chat_app/feature/login/presentation/controller/controller_auth.dart';
 import 'package:chat_app/main.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({
@@ -10,7 +8,7 @@ class LoginScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  State<LoginScreen> createState() => _LoginScreenState();
 }
 
 class _LoginScreenState extends State<LoginScreen> {
@@ -28,16 +26,14 @@ class _LoginScreenState extends State<LoginScreen> {
     });
   }
 
-  // sign out function
-  _signin() async {
-    await FirebaseAuth.instance.signOut();
-    await GoogleSignIn().signOut();
-  }
+  // // sign out function
+  // _signin() async {
+  //   await FirebaseAuth.instance.signOut();
+  //   await GoogleSignIn().signOut();
+  // }
 
   @override
   Widget build(BuildContext context) {
-    final LoginScreenController controller;
-    // mq = MediaQuery.of(context).size;
     return Scaffold(
       appBar: _buildAppBar(context),
       body: _buildBody(context),
@@ -73,8 +69,7 @@ class _LoginScreenState extends State<LoginScreen> {
               elevation: 1,
             ),
             onPressed: () {
-              _loginScreenController
-                  .handleGoogleBtnClick(context);
+              _loginScreenController.handleGoogleBtnClick(context);
             },
             icon: Image.asset(
               'assets/images/google.png',

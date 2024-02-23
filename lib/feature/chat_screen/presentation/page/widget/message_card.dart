@@ -4,7 +4,6 @@ import 'package:chat_app/core/apis/apis.dart';
 import 'package:chat_app/helpers/my_date_util.dart';
 import 'package:chat_app/main.dart';
 import 'package:chat_app/models/message_model.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 // for showing single message details

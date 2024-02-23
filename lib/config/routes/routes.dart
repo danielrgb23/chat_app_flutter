@@ -9,7 +9,7 @@ class AppRoutes {
         return _materialRoute(const LoginScreen());
 
       case 'initScream':
-        return _materialRoute(HomeScreen());
+        return _materialRoute(const HomeScreen());
 
       case 'login':
         return _materialRoute(const LoginScreen());

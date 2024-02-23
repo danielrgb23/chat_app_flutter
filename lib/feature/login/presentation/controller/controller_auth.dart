@@ -23,6 +23,7 @@ class LoginScreenController {
         log('\nUserAdditionalInfo: ${user.additionalUserInfo}');
 
         if (await APIs.userExists()) {
+          // ignore: use_build_context_synchronously
           Navigator.pushReplacementNamed(
             context,
             'initScream',

@@ -34,6 +34,7 @@ class GoogleSignInUseCase {
       return userCredential;
     } catch (e) {
       log('\nsignInWithGoogle: $e');
+      // ignore: use_build_context_synchronously
       Dialogs.showSnackBar(context, 'Sominthing Went Wrong (Check Internet!)');
       return null;
     }

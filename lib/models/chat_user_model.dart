@@ -36,7 +36,6 @@ class ChatUserModel extends ChatUserEntity {
         json['email'] ?? '');
   }
 
-  @override
   Map<String, dynamic> toJson() {
     return {
       'image': image,
