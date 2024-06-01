@@ -1,16 +1,73 @@
-# chat_app
 
-A new Flutter project.
+# Chat-App
 
-## Getting Started
+O Chat-App se trata de um aplicação de chat onde se é possivel mandar texto, fotos e videos.
 
-This project is a starting point for a Flutter application.
+Usando de tecnologias atualizadas e tendencias de mercado para construir um app de chat funcional com perfil de design voltado ao usuario.
 
-A few resources to get you started if this is your first Flutter project:
+## Aprendizados
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Na construção, elaboração e desenvolvimento desse app pude aprender sobre:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Gerenciamento de banco de dados avançado usando do firebase.
+
+- Padroes de arquitetura de software (Clean architeture, MVC, Design patterns)
+
+- Construção de widgets reutilizaveis
+
+- variaveis do android
+
+- POO (Programação orientada a objetos)
+
+
+## Funcionalidades
+
+- Login e registro atravez do google
+- Editar perfil de usuario
+- Envio de imagens, textos e videos
+- Multiplataforma
+
+## Funcionalidades futuras
+
+- Separar a listas de usuarios disponiveis para conversar por id/codigo do usuario (no momento esta retornando todos os usuarios para conversar)
+
+- Chat por video
+
+- Login por email e senha
+
+- Envio de documentos
+
+- Melhoria da performance do app
+
+
+## Rodando localmente
+
+Clone o projeto
+
+```bash
+  git clone https://github.com/danielrgb23/chat_app_flutter.git
+```
+
+Entre no diretório do projeto
+
+```bash
+  cd chat_app_flutter
+```
+
+Instale as dependências
+
+```bash
+  flutter pub dev
+```
+
+Inicie o servidor
+
+```bash
+  flutter run
+```
+
+
+## Autores
+
+- [@Danielrgb23](https://www.github.com/danielrgb23)
+
